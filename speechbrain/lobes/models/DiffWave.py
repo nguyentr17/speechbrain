@@ -459,6 +459,10 @@ class DiffWave(nn.Module):
             spectrogram is not None and self.spectrogram_upsampler is not None
         )
 
+        if len(audio.shape) == 2:
+            # Add in_channel dimension
+            audio = audio.unsqueeze(1)
+
         x = self.input_projection(audio)
         x = F.relu(x)
 
